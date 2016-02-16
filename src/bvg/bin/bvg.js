@@ -1,7 +1,7 @@
 /**
  * Created by max on 2/16/16.
  */
-var httpClient = require('./httpClient');
+var httpClient = require('./../../httpClient');
 var cheerio = require('cheerio');
 var q = require('q');
 
