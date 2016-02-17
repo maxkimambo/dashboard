@@ -5,6 +5,7 @@
 var app = require('../app');
 var debug = require('debug')('dashboard:server');
 var http = require('http');
+var socketHandler = require('./../src/socketHandler');
 
 
 /**
@@ -20,6 +21,7 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
+socketHandler.listen(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -27,6 +29,8 @@ var server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
 
 /**
  * Normalize a port into a number, string, or false.

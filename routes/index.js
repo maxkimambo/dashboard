@@ -24,7 +24,6 @@ router.get('/traffic', function(req, res, next){
 
         res.json(result);
     });
-
 });
 
 module.exports = router;
