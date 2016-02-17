@@ -3,8 +3,13 @@
  */
 var bvg = require('./bvg');
 var weather = require('./weather');
-//bvg.getSchedule('roederplatz').then(function(res){
-//      console.log(res);
-//});
+var config = require('./../config/config');
+
+bvg.getSchedule(config.bvg.station).then(function(res){
+      console.log(res);
+});
+
+//console.log();
+
 
 weather.getCurrentWeather();

@@ -1,0 +1,24 @@
+{
+  "name": "dashboard",
+  "description": "The dashboard",
+  "main": "",
+  "authors": [
+    "Max Kimambo <max@kimambo.de>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/maxkimambo/dashboard",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.0",
+    "bootstrap": "^3.3.6"
+  }
+}
