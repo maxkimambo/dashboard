@@ -6,17 +6,25 @@ var weather = require('./../src/weather');
 var config = require('./../config/config');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
 
-  bvg.getSchedule(config.bvg.station).then(function(res){
-    console.log(res);
-  });
+    res.render('index', {title: 'Express'});
+});
 
-  weather.getCurrentWeather().then(function(res){
+router.get('/weather', function (req, res, next) {
 
-  });
+    weather.getCurrentWeather().then(function (result) {
+        res.json(result);
+    });
+});
 
-  res.render('index', { title: 'Express' });
+router.get('/traffic', function(req, res, next){
+
+    bvg.getSchedule(config.bvg.station).then(function (result) {
+
+        res.json(result);
+    });
+
 });
 
 module.exports = router;
