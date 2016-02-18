@@ -7,3 +7,11 @@ socket.on('connect', function(data){
     console.log('connected to socket');
     socket.emit('join', 'Test');
 });
+
+socket.on('traffic', function(trafficData){
+    console.log(trafficData);
+});
+
+socket.on('weather', function(weatherData){
+    console.log(weatherData);
+});
