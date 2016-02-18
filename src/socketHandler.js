@@ -9,7 +9,7 @@ var config = require('./../config/config');
 
 module.exports =  listen;
 
- function listen (server){
+function listen (server){
 
    var clients = [];
    var io = require('socket.io')(server);
@@ -19,25 +19,37 @@ module.exports =  listen;
         // save connections
         clients.push(socket.conn);
 
+        fetchBvgData(socket);
+
         setInterval(function(){
-            // obtain the schedule.
-            bvg.getSchedule(config.bvg.station).then(function(result){
-                socket.emit('traffic', result);
-            });
+            fetchBvgData(socket);
         }, 1000*60*1); // every min
 
         // get weather data
+        fetchWeather(socket);
 
         setInterval(function(){
 
-            weather.getCurrentWeather().then(function(weatherData){
-                console.log(weatherData);
-                socket.emit('weather', weatherData);
-            });
+           fetchWeather(socket);
 
         }, 1000*60*5); // every 5 min
 
     });
+
+     function fetchWeather(socket){
+         weather.getCurrentWeather().then(function(weatherData){
+             console.log(weatherData);
+             socket.emit('weather', weatherData);
+         });
+     }
+
+
+    function fetchBvgData(socket) {
+// obtain the schedule.
+        bvg.getSchedule(config.bvg.station).then(function (result) {
+            socket.emit('traffic', result);
+        });
+    }
 
 
 
