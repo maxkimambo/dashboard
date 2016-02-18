@@ -29,7 +29,8 @@ bvg.prototype.getSchedule = function(stationName){
         for (var i =0; i < rows.length; i++){
             var scheduleItem = {};
             var current = rows[i];
-            scheduleItem.departure = $(current).children().first().text();
+
+            scheduleItem.departure = $(current).children().first().text().replace('*', '');
             scheduleItem.line = $(current).children().eq(1).text();
             scheduleItem.direction = $(current).children().last().text();
 
@@ -37,11 +38,7 @@ bvg.prototype.getSchedule = function(stationName){
                 // shit happens after here
             scheduleData[i] = scheduleItem;
         }
-
-        console.log('promise resolved');
-        console.log(scheduleData);
-
-        defer.resolve(scheduleData);
+       defer.resolve(scheduleData);
     });
 
     return defer.promise;

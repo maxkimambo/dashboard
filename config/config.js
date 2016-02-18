@@ -5,8 +5,8 @@ var config = {};
 
 config.weather = {
     apiKey: '67eaa21c69df0a3c424c0614362fa66b',
-    city: 'Berlin, DE',
-    hostUrl: 'http://api.openweathermap.org/data/2.5/weather?q='
+    city: 'Berlin',
+    hostUrl: 'http://api.openweathermap.org/data/2.5/weather?&q='
 };
 
 config.news ={
@@ -14,7 +14,8 @@ config.news ={
 };
 
 config.bvg = {
-   station : 'Loeperplatz'
+   station : 'Loeperplatz',
+    timeToStation : 5
 };
 
 module.exports = config;

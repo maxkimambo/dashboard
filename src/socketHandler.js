@@ -19,18 +19,23 @@ module.exports =  listen;
         // save connections
         clients.push(socket.conn);
 
-        // obtain the schedule. 
-        bvg.getSchedule(config.bvg.station).then(function(result){
-                 socket.emit('traffic', result);
-        });
+        setInterval(function(){
+            // obtain the schedule.
+            bvg.getSchedule(config.bvg.station).then(function(result){
+                socket.emit('traffic', result);
+            });
+        }, 1000*60*1); // every min
 
         // get weather data
 
-        weather.getCurrentWeather().then(function(weatherData){
+        setInterval(function(){
 
-            socket.emit('weather', weatherData);
-        });
+            weather.getCurrentWeather().then(function(weatherData){
+                console.log(weatherData);
+                socket.emit('weather', weatherData);
+            });
 
+        }, 1000*60*5); // every 5 min
 
     });
 
