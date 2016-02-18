@@ -6,7 +6,8 @@ var config = {};
 config.weather = {
     apiKey: '67eaa21c69df0a3c424c0614362fa66b',
     city: 'Berlin',
-    hostUrl: 'http://api.openweathermap.org/data/2.5/weather?&q='
+    hostUrl: 'http://api.openweathermap.org/data/2.5/weather?&q=',
+    imageUrl: 'http://openweathermap.org/img/w/'
 };
 
 config.news ={
