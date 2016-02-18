@@ -1,4 +1,4 @@
-<div id="page-wrapper">
+<div id="page-wrapper" ng-controller="dashboardController">
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">Dashboard</h1>
@@ -106,6 +106,23 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
 
+                        <table class="table-condensed table-hover">
+                            <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Line</th>
+                                <th>Destination</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr ng-repeat="item in trafficData">
+                                <td ng-bind="item.departure"></td>
+                                <td ng-bind="item.line"></td>
+                                <td ng-bind="item.direction"></td>
+                            </tr>
+                            </tbody>
+                        </table>
 
                 </div>
                 <!-- /.panel-body -->

@@ -29,7 +29,6 @@ module.exports =  listen;
         weather.getCurrentWeather().then(function(weatherData){
 
             socket.emit('weather', weatherData);
-
         });
 
 

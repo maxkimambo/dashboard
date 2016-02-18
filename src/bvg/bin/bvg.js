@@ -14,52 +14,37 @@ bvg.prototype.getSchedule = function(stationName){
     var defer = q.defer();
 
     var url ='http://mobil.bvg.de/Fahrinfo/bin/stboard.bin/dox?ld=0.1&input='+ stationName +'&boardType=depRT&start=yes';
-    var scheduleData = [];
+
 
     httpClient.get(url).then(function(res){
 
-       var $ = cheerio.load(res);
+        var scheduleData = [];
+
+        var $ = cheerio.load(res);
 
 
-        var scheduleItem = {};
-        var counter = 0;
 
-        $('table>tbody>tr').children().each(function(ind, elem){
+        var rows = $('table>tbody').find('tr');
 
-            switch (counter){
-                case 0: {
-                    scheduleItem.departure = $(this).text();
-                    counter++;
-                    break;
-                }
+        for (var i =0; i < rows.length; i++){
+            var scheduleItem = {};
+            var current = rows[i];
+            scheduleItem.departure = $(current).children().first().text();
+            scheduleItem.line = $(current).children().eq(1).text();
+            scheduleItem.direction = $(current).children().last().text();
 
-                case 1: {
-                    scheduleItem.line = $(this).text();
-                    counter++;
-                    break;
-                }
-                case 2:{
-                    scheduleItem.direction = $(this).text();
-                    counter++;
-                    break;
-                }
+                // schedule item is correct
+                // shit happens after here
+            scheduleData[i] = scheduleItem;
+        }
 
-            }
-
-            // we need to reset the counter every 3rd item
-            // there are only 3 cells in the table
-
-            if ((ind % 3) === 2) {
-                counter = 0;
-                scheduleData.push(scheduleItem);
-            }
-        });
+        console.log('promise resolved');
+        console.log(scheduleData);
 
         defer.resolve(scheduleData);
     });
 
     return defer.promise;
-
 };
 
 
