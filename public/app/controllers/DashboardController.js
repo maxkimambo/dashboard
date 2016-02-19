@@ -20,17 +20,32 @@
         socket.on('traffic', function(trafficData){
             $scope.$apply(function(){
                 $scope.trafficData = trafficData;
-                    console.log(trafficData);
             });
 
         });
 
         socket.on('weather', function(weatherData){
             $scope.$apply(function(){
-                $scope.weather = weatherData;
-                console.log(weatherData);
+                var weather = JSON.parse(weatherData);
+                $scope.weather = trimWeatherData(weather);
+                console.log($scope.weather);
             });
         });
+
+        function trimWeatherData(res){
+
+           return  { temp: 'Temp ' + res.main.temp + ' C',
+                pressure: res.main.pressure,
+                humidity: res.main.humidity,
+                description : res.weather[0].description,
+                icon : res.weather[0].icon,
+                sunrise: res.sys.sunrise,
+                sunset :res.sys.sunset,
+                windspeed : 'Wind ' + res.wind.speed + 'km/h'
+            };
+
+        }
+
 
     }
 })();

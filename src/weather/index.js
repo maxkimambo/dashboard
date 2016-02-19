@@ -10,11 +10,10 @@ var q = require('q');
 weather.prototype.getCurrentWeather = function (){
 
      var requestUrl = config.weather.hostUrl + config.weather.city + '&units=metric' + '&appid='+config.weather.apiKey;
-    console.log(requestUrl);
      var defer = q.defer();
 
     http.get(requestUrl).then(function(res){
-        defer.resolve(res);
+           defer.resolve(res);
     });
     return defer.promise;
 };

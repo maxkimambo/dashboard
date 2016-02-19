@@ -23,7 +23,7 @@ function listen (server){
 
         setInterval(function(){
             fetchBvgData(socket);
-        }, 1000*60*1); // every min
+        }, config.bvg.refreshInterval);
 
         // get weather data
         fetchWeather(socket);
@@ -32,14 +32,16 @@ function listen (server){
 
            fetchWeather(socket);
 
-        }, 1000*60*5); // every 5 min
+        }, config.weather.refreshInterval);
 
     });
 
      function fetchWeather(socket){
+
          weather.getCurrentWeather().then(function(weatherData){
-             console.log(weatherData);
              socket.emit('weather', weatherData);
+         }, function(err){
+             console.error(err);
          });
      }
 

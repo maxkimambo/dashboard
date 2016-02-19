@@ -1,0 +1,41 @@
+{
+  "coord": {
+    "lon": 13.41,
+    "lat": 52.52
+  },
+  "weather": [
+    {
+      "id": 801,
+      "main": "Clouds",
+      "description": "few clouds",
+      "icon": "02d"
+    }
+  ],
+  "base": "cmc stations",
+  "main": {
+    "temp": 4.85,
+    "pressure": 1026.13,
+    "humidity": 100,
+    "temp_min": 4.85,
+    "temp_max": 4.85,
+    "sea_level": 1032.12,
+    "grnd_level": 1026.13
+  },
+  "wind": {
+    "speed": 2.3,
+    "deg": 281.503
+  },
+  "clouds": {
+    "all": 12
+  },
+  "dt": 1455883917,
+  "sys": {
+    "message": 0.0037,
+    "country": "DE",
+    "sunrise": 1455862484,
+    "sunset": 1455899189
+  },
+  "id": 2950159,
+  "name": "Berlin",
+  "cod": 200
+}
