@@ -5,6 +5,7 @@
 var bvg = require('./bvg');
 var weather = require('./weather');
 var config = require('./../config/config');
+var _ = require('lodash');
 
 
 module.exports =  listen;
@@ -39,6 +40,7 @@ function listen (server){
      function fetchWeather(socket){
 
          weather.getCurrentWeather().then(function(weatherData){
+
              socket.emit('weather', weatherData);
          }, function(err){
              console.error(err);

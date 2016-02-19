@@ -9,6 +9,7 @@ config.weather = {
     hostUrl: 'http://api.openweathermap.org/data/2.5/weather?&q=',
     imageUrl: 'http://openweathermap.org/img/w/',
     refreshInterval : 1000*60*1
+
 };
 
 config.news ={
@@ -18,7 +19,8 @@ config.news ={
 config.bvg = {
     station : 'Invalidenpark',
     timeToStation : 5,
-    refreshInterval : 1000*60*1
+    refreshInterval : 1000*60*1,
+    recordsToFetch : 10
 };
 
 module.exports = config;

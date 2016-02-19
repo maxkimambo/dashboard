@@ -9,6 +9,17 @@
 
     function dashController($scope){
 
+        //$scope.currentTime = moment().format('Do MMM YYYY, h:mm:ss');
+
+        setInterval(setCurrentTime, 1000);
+
+        function setCurrentTime(){
+
+            $scope.$apply(function(){
+                $scope.currentTime = moment().format('Do MMM YYYY, h:mm:ss');
+            });
+        }
+
         function calcTimeToSunset(sunset){
              return  moment(sunset).calendar();
         }

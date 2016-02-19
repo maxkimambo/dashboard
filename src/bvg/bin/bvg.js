@@ -4,6 +4,7 @@
 var httpClient = require('./../../httpClient');
 var cheerio = require('cheerio');
 var q = require('q');
+var config = require('./../../../config/config');
 
 var bvg = function (){
 
@@ -26,7 +27,7 @@ bvg.prototype.getSchedule = function(stationName){
 
         var rows = $('table>tbody').find('tr');
 
-        for (var i =0; i < rows.length; i++){
+        for (var i =0; i < config.bvg.recordsToFetch; i++){
             var scheduleItem = {};
             var current = rows[i];
 
@@ -34,8 +35,6 @@ bvg.prototype.getSchedule = function(stationName){
             scheduleItem.line = $(current).children().eq(1).text();
             scheduleItem.direction = $(current).children().last().text();
 
-                // schedule item is correct
-                // shit happens after here
             scheduleData[i] = scheduleItem;
         }
        defer.resolve(scheduleData);
