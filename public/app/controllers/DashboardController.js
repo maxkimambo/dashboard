@@ -28,7 +28,7 @@
            return moment(sunrise).calendar();
         }
 
-        var socket = io.connect('http://localhost:3000');
+        var socket = io.connect('http://kimambo.de:3000');
 
         socket.on('connect', function(data){
             console.log('connected to socket');
