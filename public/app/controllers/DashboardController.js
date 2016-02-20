@@ -5,11 +5,13 @@
 
 (function(){
     angular.module('dash').controller('dashboardController', dashController);
-    dashController.$inject = ["$scope"];
+    dashController.$inject = ["$scope", "$location" ];
 
-    function dashController($scope){
+    function dashController($scope, $location){
 
-        //$scope.currentTime = moment().format('Do MMM YYYY, h:mm:ss');
+        var socketUrl = $location.protocol() + '://' + $location.host() + ':' + '3000';
+
+        console.log(socketUrl);
 
         setInterval(setCurrentTime, 1000);
 
@@ -28,7 +30,9 @@
            return moment(sunrise).calendar();
         }
 
-        var socket = io.connect('http://kimambo.de:3000');
+
+
+        var socket = io.connect(socketUrl);
 
         socket.on('connect', function(data){
             console.log('connected to socket');
