@@ -20,41 +20,45 @@ function listen (server){
         // save connections
         clients.push(socket.conn);
 
-        fetchBvgData(socket);
+        fetchBvgData();
 
         setInterval(function(){
-            fetchBvgData(socket);
+            fetchBvgData();
         }, config.bvg.refreshInterval);
 
         // get weather data
-        fetchWeather(socket);
+        fetchWeather();
 
         setInterval(function(){
 
-           fetchWeather(socket);
+           fetchWeather();
 
         }, config.weather.refreshInterval);
 
+
+        function fetchBvgData() {
+            // obtain the schedule.
+            bvg.getSchedule(config.bvg.station).then(function (result) {
+                result.station = config.bvg.station;
+                io.emit('traffic', result);
+            });
+        }
+
+        function fetchWeather(){
+
+            weather.getCurrentWeather().then(function(weatherData){
+
+                // we do io.emit because we send the info to all the connected clients all at once.
+                io.emit('weather', weatherData);
+            }, function(err){
+                console.error(err);
+            });
+        }
+
+
     });
 
-     function fetchWeather(socket){
 
-         weather.getCurrentWeather().then(function(weatherData){
-
-             socket.emit('weather', weatherData);
-         }, function(err){
-             console.error(err);
-         });
-     }
-
-
-    function fetchBvgData(socket) {
-        // obtain the schedule.
-        bvg.getSchedule(config.bvg.station).then(function (result) {
-            result.station = config.bvg.station;
-            socket.emit('traffic', result);
-        });
-    }
 
 
 
