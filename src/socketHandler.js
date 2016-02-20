@@ -49,8 +49,9 @@ function listen (server){
 
 
     function fetchBvgData(socket) {
-// obtain the schedule.
+        // obtain the schedule.
         bvg.getSchedule(config.bvg.station).then(function (result) {
+            result.station = config.bvg.station;
             socket.emit('traffic', result);
         });
     }
